@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(168, 52, 252);
+}
+
+.btn-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3847c9; /* خاکستری */
+    color: #24c667;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-button:hover {
+    background-color: #1a537e;
+}

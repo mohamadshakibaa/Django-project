@@ -1,0 +1,29 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+    {% block extra_css %}
+    {% endblock  %}
+</head>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Project 1</h1>
+        <nav>
+            <a href="{% url 'core:home' %}" class="btn-custom">Home</a>
+            <a href="{% url 'core:about' %}" class="btn-custom">About</a>
+            <a href="{% url 'core:title' %}" class="btn-custom">Title</a>
+            <a href="{% url 'core:contact' %}" class="btn-custom">Contact</a>
+        </nav>
+    </header>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

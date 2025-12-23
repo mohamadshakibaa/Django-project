@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>About Page</h2>
+<p>This is Project P</p>
+<a href="{% url 'core:contact' %}"><button class="btn-button">click here to contact</button></a>
+<br><br><br><br>{{ message }}
+{% endblock %}
