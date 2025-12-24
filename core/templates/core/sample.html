@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/sample.css' %}">
+{% endblock  %}
+
+{% block content %}
+<h1>Hello welcome to my project</h1>
+<button class='btn-custom'><a href="{% url 'core:title' %}"><h2>Click here to Title</h2></a></button>
+{% endblock  %}

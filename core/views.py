@@ -13,7 +13,7 @@ def products(request):
 def contact(request):
     return render(request, 'core/contact.html')
 
-def sample_view(request):
+def sample(request):
     if request.method == 'POST':
         return HttpResponse("POST received")
     
