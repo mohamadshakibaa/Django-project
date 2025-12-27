@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404
 from django.http import HttpResponse
+from .models import Product
 
 def home(request):
     return render(request, 'core/home.html')
@@ -24,3 +25,7 @@ def base(request):
 
 def title(request):
     return render(request, 'core/title.html')
+
+def product_detail(request, product_id):
+    product = get_list_or_404(Product, id=product_id)
+    return render(request, 'core/product_detail.html', {"product": product})
