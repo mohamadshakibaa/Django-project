@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_list_or_404, redirect
+from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from .models import Product
 from .forms import ProductForm
@@ -70,17 +71,56 @@ def cart_add(request, product_id):
 def cart_detail(request):
     cart = request.session.get('cart', {})
     product_ids = cart.keys()
-    
+
     products = Product.objects.filter(id__in=product_ids)
-    
+
     cart_items = []
-    
+    total_price = 0
+
     for product in products:
         item = cart[str(product.id)]
+        item_total = product.get_final_price() * item['quantity']
+
         cart_items.append({
             'product': product,
             'quantity': item['quantity'],
-            'total_price': product.get_final_price() * item['quantity']
+            'item_total': item_total
         })
-        
-    return render(request, 'core/cart_detail.html', {'cart_items': cart_items})
+
+        total_price += item_total
+
+    return render(request, 'core/cart_detail.html', {
+        'cart_items': cart_items,
+        'total_price': total_price
+    })
+
+
+@require_POST
+def cart_decrease(request, product_id):
+    cart = request.session.get('cart', {})
+    pid = str(product_id)
+
+    if pid in cart:
+        cart[pid]['quantity'] -= 1
+
+        if cart[pid]['quantity'] <= 0:
+            del cart[pid]
+
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    return redirect('core:cart_detail')
+
+
+@require_POST
+def cart_remove(request, product_id):
+    cart = request.session.get('cart', {})
+    pid = str(product_id)
+
+    if pid in cart:
+        del cart[pid]
+
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    return redirect('core:cart_detail')
