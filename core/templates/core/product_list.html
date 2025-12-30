@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h2>Products</h2>
+
+<a href="{% url 'core:product_create' %}">Add product</a>
+
+<ul>
+  {% for product in products %}
+    <li>
+      <a href="{% url 'core:product_detail' product.id %}">
+        {{ product.name }} - {{ product.price }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

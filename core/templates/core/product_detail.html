@@ -1,11 +1,16 @@
-{% extends "core/base.html" %} {% block content %}
-<h1>{{ product.name }}</h1>
+{% extends "core/base.html" %}
+{% block content %}
+<h2>{{ product.name }}</h2>
+<p>Price: {{ product.price }}</p>
+<p>Category: {{ product.category }}</p>
 
-<p>Base price: {{ product.price }}</p>
-<p>Final price: {{ product.get_final_price }}</p>
+<a href="{% url 'core:product_update' product.id %}">Edit</a>
 
-{% if product.is_available %}
-<p>Status: Available</p>
-{% else %}
-<p>Status: Not Available</p>
-{% endif %} {% endblock %}
+<form method="post" action="{% url 'core:product_delete' product.id %}">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
+
+<a href="{% url 'core:product_list' %}">Back</a>
+{% endblock %}
+

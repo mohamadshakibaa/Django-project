@@ -16,10 +16,9 @@
     <header>
         <h1>Project 1</h1>
         <nav>
-            <a href="{% url 'core:home' %}" class="btn-custom">Home</a>
-            <a href="{% url 'core:about' %}" class="btn-custom">About</a>
-            <a href="{% url 'core:contact' %}" class="btn-custom">Contact</a>
-            <a href="{% url 'core:cart_detail' %}" class="btn-custom">Cart detail</a>
+            <a href="{% url 'core:product_list' %}" class="btn-custom">Home</a>
+            {% comment %} <a href="{% url 'core:product_detail' %}" class="btn-custom">About</a> {% endcomment %}
+            {% comment %} <a href="{% url 'core:contact' %}" class="btn-custom">Contact</a> {% endcomment %}
         </nav>
     </header>
     <hr>

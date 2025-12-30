@@ -34,4 +34,3 @@ class Product(models.Model):
         tax_rate = Decimal('0.09')
         return self.price + (self.price * tax_rate)
     
-    
