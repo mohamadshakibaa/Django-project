@@ -21,12 +21,12 @@ def contact(request):
 
 
 def product_list(request):
-    products = Product.objects.active()
+    products = Product.objects.all()
     return render(request, 'core/product_list.html', {"products": products})
 
 
-def product_detail(request, product_id):
-    product = get_list_or_404(Product, id=product_id)
+def product_detail(request, pk):
+    product = get_object_or_404(Product, id=pk)
     return render(request, 'core/product_detail.html', {"product": product})
 
 
@@ -35,7 +35,9 @@ def product_create(request):
         form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("Product Created")
+            product = form.save()
+            return redirect("core:product_detail", pk=product.id)
+
     
     else:
         form = ProductForm()
@@ -64,7 +66,7 @@ def product_delete(request, pk):
         product.delete()
         return redirect("core:product_list")
 
-    return render(request, "core/product_confirm_delete.html", {"product": product})
+    return render(request, "core/product_delete.html", {"product": product})
 
 
 # def activate_product(request, pk):
